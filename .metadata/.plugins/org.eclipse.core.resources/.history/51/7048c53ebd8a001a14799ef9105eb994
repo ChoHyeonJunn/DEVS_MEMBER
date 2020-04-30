@@ -1,0 +1,16 @@
+package com.devs.member.model.Repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.devs.member.model.vo.MemberVo;
+
+@Repository
+public interface MemberRepository extends JpaRepository<MemberVo, Integer> {
+
+	// 로그인
+	public Optional<MemberVo> findByMember_emailAndMember_pw(String member_email, String member_pw);
+
+}

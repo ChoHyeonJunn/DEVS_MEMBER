@@ -1,0 +1,19 @@
+package com.devs.member.model.service;
+
+import java.util.Map;
+
+import com.devs.member.model.vo.MemberVo;
+
+public interface MemberService {
+
+	public Map<String, Object> login(MemberVo vo);
+
+	public int join(MemberVo vo);
+
+	public MemberVo snsLogin(MemberVo vo);
+
+	public int emailCheck(MemberVo vo);
+
+	public int idCheck(MemberVo vo);
+
+}

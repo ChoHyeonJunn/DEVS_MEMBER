@@ -1,0 +1,42 @@
+package com.devs.member.model.service;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.devs.member.model.Repository.MemberRepository;
+import com.devs.member.model.vo.MemberVo;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+
+	@Autowired
+	private MemberRepository memberRepository;
+	
+	@Override
+	public Map<String, Object> login(MemberVo vo) {
+		return null;
+	}
+
+	@Override
+	public int join(MemberVo vo) {
+		return 0;
+	}
+
+	@Override
+	public int emailCheck(MemberVo vo) {
+		return 0;
+	}
+
+	@Override
+	public int idCheck(MemberVo vo) {
+		return 0;
+	}
+
+	@Override
+	public MemberVo snsLogin(MemberVo vo) {
+		return null;
+	}
+
+}

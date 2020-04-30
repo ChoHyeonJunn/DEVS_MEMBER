@@ -1,0 +1,9 @@
+package com.devs.member.model.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.devs.member.model.vo.MemberVo;
+
+public interface MemberDao extends JpaRepository<MemberVo, Integer> {
+
+}
