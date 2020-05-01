@@ -1,12 +1,21 @@
 package com.devs.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.devs.member.model.Repository.MemberRepository;
+import com.devs.member.model.entity.Member;
+import com.devs.member.model.repository.MemberRepository;
 import com.devs.member.model.vo.MemberVo;
 
 @Service
@@ -15,38 +24,69 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	@Override
-	public Map<String, Object> login(MemberVo vo) {
-		Map<String, Object> map = null;
+//	@Override
+//	public Map<String, Object> login(MemberVo vo) {
+//		Map<String, Object> map = null;
+//
+//		MemberVo mres = null;
+//
+//		if (vo.getMemberemail() != null) {
+//			mres = memberRepository.findByMemberemailAndMemberpassword(vo.getMemberemail(), vo.getMemberpassword());
+//		} else if (vo.getMemberphone() != null) {
+//			mres = memberRepository.findByMemberphoneAndMemberpassword(vo.getMemberphone(), vo.getMemberpassword());
+//		} else {
+//			mres = memberRepository.findByMemberidAndMemberpassword(vo.getMemberid(), vo.getMemberpassword());
+//		}
+//
+//		System.out.println(mres);
+//		if (mres != null) {
+//			map = new HashMap<>();
+//			map.put("login", mres);
+//			return map;
+//		} else {
+//			return map; // 멤버 정보를 가져오지 못했다면 null인 객체를 return
+//		}
+//	}
 
-		MemberVo mres = memberRepository.findByMemberidAndMemberpassword(vo.getMemberemail(), vo.getMemberpassword());
-		System.out.println(mres);
-		if (mres != null) {
-			map = new HashMap<>();
-			map.put("login", mres);
-			return map;
-		} else {
-			return map; // 멤버 정보를 가져오지 못했다면 null인 객체를 return
-		}
+	@Override
+	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
+
+		Member member = memberRepository.findByMemberid(account);
+
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("MEMBER"));
+
+		return new User(member.getMemberid(), member.getMemberpassword(), authorities);
 	}
 
 	@Override
 	public int join(MemberVo vo) {
+
+		Member member = vo.toEntity();
+
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		vo.setMemberpassword(passwordEncoder.encode(vo.getMemberpassword()));
+
+		return memberRepository.save(member).getMembercode();
+	}
+
+	@Override
+	public Map<String, Object> login(Member vo) {
+		return null;
+	}
+
+	@Override
+	public int emailCheck(Member vo) {
 		return 0;
 	}
 
 	@Override
-	public int emailCheck(MemberVo vo) {
+	public int idCheck(Member vo) {
 		return 0;
 	}
 
 	@Override
-	public int idCheck(MemberVo vo) {
-		return 0;
-	}
-
-	@Override
-	public MemberVo snsLogin(MemberVo vo) {
+	public Member snsLogin(Member vo) {
 		return null;
 	}
 

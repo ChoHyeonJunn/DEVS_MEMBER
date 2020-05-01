@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.devs.member.model.entity.Member;
 import com.devs.member.model.service.MemberService;
-import com.devs.member.model.vo.MemberVo;
 
 @RestController
 public class MemberController {
@@ -27,6 +28,7 @@ public class MemberController {
 	/*
 	 * test
 	 */
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/result")
 	public ModelAndView resultPage() {
 		return new ModelAndView("result");
@@ -68,7 +70,7 @@ public class MemberController {
 	 */
 	// login ajax 처리
 	@PostMapping(value = "/login")
-	public Map<String, Boolean> login(HttpSession session, @RequestBody MemberVo vo) {
+	public Map<String, Boolean> login(HttpSession session, @RequestBody Member vo) {
 		System.out.println(vo);
 		Map<String, Object> res = memberService.login(vo);
 		boolean check = false;
