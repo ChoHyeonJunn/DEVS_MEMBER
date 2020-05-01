@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
@@ -34,22 +33,22 @@
 			</div>
 			
 			<div>		
-				<form id="joinForm" action="/join" method="post">
+				<form id="joinForm" action="/join" method="post" name="MemberVo">
 					<!-- 이메일 -->
-					<input id="member_email" type="text" name="member_email" required="required" placeholder="휴대폰 번호 또는 이메일 주소">
+					<input type="text" name="memberemail" required="required" placeholder="휴대폰 번호 또는 이메일 주소">
 					
 					<!-- 성명 -->
-					<input id="member_name" type="text" name="member_name" required="required" placeholder="성명">
+					<input type="text" name="membername" required="required" placeholder="성명">
 					
 					<!-- 사용자 이름 -->
-					<input id="member_id" type="text" name="member_id" required="required" placeholder="사용자 이름">
+					<input type="text" name="memberid" required="required" placeholder="사용자 이름">
 					
 					<!-- 비밀번호 -->
-					<input id="member_pw" type="password" name="member_pw" required="required" placeholder="비밀번호">
+					<input type="password" name="memberpassword" required="required" placeholder="비밀번호">
 					
 					<!-- 회원가입 버튼 -->					
 					<input type="button" value="회원가입" onclick="join();">
-					
+					<input type="submit" value="security회원가입">
 					<!-- 유효성검층 출력부분 -->					
 					<div id="joinchk"></div>
 				</form>

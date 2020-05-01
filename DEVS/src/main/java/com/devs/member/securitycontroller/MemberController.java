@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.devs.member.model.entity.Member;
 import com.devs.member.model.service.MemberService;
+import com.devs.member.model.vo.MemberVo;
 
 @Controller
 public class MemberController {
@@ -69,6 +70,15 @@ public class MemberController {
 	/*
 	 * 회원가입 / 로그인 처리
 	 */
+	@PostMapping("/join")
+	public ModelAndView joinProcess(MemberVo vo) {
+
+		System.out.println("controller : >>>" + vo);
+
+		memberService.join(vo);
+		return new ModelAndView("root");
+	}
+
 	// login ajax 처리
 	@PostMapping(value = "/login")
 	public Map<String, Boolean> login(HttpSession session, @RequestBody Member vo) {

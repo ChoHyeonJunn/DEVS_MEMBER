@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.devs.member.model.Repository.MemberRepository;
 import com.devs.member.model.entity.Member;
+import com.devs.member.model.repository.MemberRepository;
 import com.devs.member.model.vo.MemberVo;
 
 @Service
@@ -50,7 +50,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
 
+		System.out.println(">>>>" + account);
+
 		Member member = memberRepository.findByMemberid(account);
+
+		System.out.println(">>>>>" + member);
 
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("MEMBER"));
@@ -64,7 +68,7 @@ public class MemberServiceImpl implements MemberService {
 		Member member = vo.toEntity();
 
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		vo.setMemberpassword(passwordEncoder.encode(vo.getMemberpassword()));
+		member.setMemberpassword(passwordEncoder.encode(vo.getMemberpassword()));
 
 		return memberRepository.save(member).getMembercode();
 	}

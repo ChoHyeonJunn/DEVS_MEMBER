@@ -5,24 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "MEMBER")
 @Entity
 public class Member {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_CODE_SEQ_GENERATOR")
 	@Column(name = "MEMBER_CODE")
+	@SequenceGenerator(name = "MEMBER_CODE_SEQ_GENERATOR", sequenceName = "MEMBER_CODE_SEQ", initialValue = 1, allocationSize = 1)
+	// name=식별자 생성기 이름, sequenceName=DB에 등록될 시퀀스이름, initialValue=최초시작하는 수,
+	// allocationSize=증가하는수)
 	private int membercode;
 
 	@Column(name = "MEMBER_EMAIL")
