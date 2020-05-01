@@ -1,4 +1,4 @@
-package com.devs.member.controller;
+package com.devs.member.securitycontroller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,17 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.devs.member.model.entity.Member;
 import com.devs.member.model.service.MemberService;
 
-@RestController
+@Controller
 public class MemberController {
 
 	@Autowired
@@ -38,9 +39,9 @@ public class MemberController {
 	 * 페이지 처리
 	 */
 	// 루트 - 로그인 페이지
-	@GetMapping("/")
+	@RequestMapping("/")
 	public ModelAndView rootPage(Model model) {
-
+		System.out.println("root request!!!");
 		// kakao login 링크
 		model.addAttribute("kakaoLoginLink", kakaoLoginLink);
 

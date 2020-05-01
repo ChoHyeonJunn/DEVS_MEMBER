@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "MEMBER")
+@Entity
 public class Member {
 
 	@Id

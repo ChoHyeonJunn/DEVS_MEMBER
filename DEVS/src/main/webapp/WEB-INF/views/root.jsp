@@ -21,15 +21,18 @@
 				DEVS
 			</h1>
 			
-			<div>							
-				<!-- 이메일 -->
-				<input type="text" name="member_id" required="required" placeholder="전화번호, 사용자 이름 또는 이메일">
-				
-				<!-- 비밀번호 -->
-				<input type="password" name="member_password" required="required" placeholder="비밀번호">
-				
-				<!-- 로그인 버튼 -->
-				<input type="button" value="로그인" onclick="login();">
+			<div>				
+				<form action="/loginProcess" method="post">			
+					<!-- 이메일 -->
+					<input type="text" name="member_id" required="required" placeholder="전화번호, 사용자 이름 또는 이메일">
+					
+					<!-- 비밀번호 -->
+					<input type="password" name="member_password" required="required" placeholder="비밀번호">
+					
+					<!-- 로그인 버튼 -->
+					<input type="button" value="로그인" onclick="login();">
+					<input type="submit" value="security로그인">
+				</form>
 			</div>
 			
 			<div>

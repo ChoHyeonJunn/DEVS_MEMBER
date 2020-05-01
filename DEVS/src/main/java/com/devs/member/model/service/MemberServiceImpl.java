@@ -1,7 +1,6 @@
 package com.devs.member.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +13,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.devs.member.model.Repository.MemberRepository;
 import com.devs.member.model.entity.Member;
-import com.devs.member.model.repository.MemberRepository;
 import com.devs.member.model.vo.MemberVo;
 
 @Service

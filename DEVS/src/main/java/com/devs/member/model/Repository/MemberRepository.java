@@ -1,4 +1,4 @@
-package com.devs.member.model.repository;
+package com.devs.member.model.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	public Member findByMemberphoneAndMemberpassword(String memberphone, String memberpassword);
 
 	public Member findByMemberidAndMemberpassword(String memberid, String memberpassword);
-	
+
 	public Member findByMemberid(String memberid);
 
 }
