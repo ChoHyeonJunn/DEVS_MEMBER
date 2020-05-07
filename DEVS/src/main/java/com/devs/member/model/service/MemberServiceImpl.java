@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -18,6 +19,7 @@ import com.devs.member.model.repository.MemberRepository;
 import com.devs.member.model.vo.MemberVo;
 
 @Service
+@Order(2)
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
@@ -59,7 +61,11 @@ public class MemberServiceImpl implements MemberService {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("MEMBER"));
 
-		return new User(member.getMemberid(), member.getMemberpassword(), authorities);
+		if (member != null) {
+			return new User(member.getMemberid(), member.getMemberpassword(), authorities);
+		} else {
+			throw new UsernameNotFoundException(account);
+		}
 	}
 
 	@Override

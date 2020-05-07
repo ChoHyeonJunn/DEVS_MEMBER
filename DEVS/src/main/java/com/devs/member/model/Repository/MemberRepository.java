@@ -1,11 +1,13 @@
 package com.devs.member.model.repository;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.devs.member.model.entity.Member;
 
 @Repository
+@Order(1)
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	// 로그인

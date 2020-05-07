@@ -1,5 +1,0 @@
-package com.devs.member.model.service;
-
-public interface MemberService {
-
-}
